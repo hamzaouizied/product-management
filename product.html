@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <form class="row g-3 needs-validation" id="productForm" action="product.php" method="POST">
+            <div class="col-md-12">
+                <label for="productName" class="form-label">Product name</label>
+                <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="quantityInStock" class="form-label">Quantity in stock</label>
+                <input type="number" class="form-control" id="quantityInStock" name="quantityInStock" placeholder="Quantity" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="price" class="form-label">Price per item</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Price" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="dateTime" class="form-label">Created at</label>
+                <input type="date" class="form-control" id="dateTime" name="dateTime" placeholder="Created at" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" id="submitProductForm" type="submit">Submit form</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <pre id="displayProduct"></pre>
+        <table id='table'>
+            <script>
+                $(document).ready(function () {
+                    $.getJSON("product.json",
+                        function (data) {
+                            var product = '<tr>\n' +
+                                '                <th>ProductName</th>\n' +
+                                '                <th>QuantityInStock</th>\n' +
+                                '                <th>Price</th>\n' +
+                                '                <th>Date Time</th>\n' +
+                                '                <th>Total Value Number</th>\n' +
+                                '            </tr>';
+                            $.each(data, function (key, value) {
+                                product += '<tr>';
+                                product += '<td>' +
+                                    value.productName + '</td>';
+
+                                product += '<td>' +
+                                    value.quantityInStock + '</td>';
+
+                                product += '<td>' +
+                                    value.price + '</td>';
+
+                                product += '<td>' +
+                                    value.dateTime + '</td>';
+                                product += '<td>' +
+                                    value.TotalValueNumber + '</td>';
+
+                                product += '</tr>';
+                                var sumProduct = value.TotalValueNumber;
+                                $('#totalAmount').css('display', 'block').html('Total Amount: '+'<h3>'+sumProduct+'</h3>');
+                            });
+                            $('#table').html(product);
+
+                        });
+                });
+            </script>
+        </table>
+        <p class="p-0" id="totalAmount" style="display: none;"></p>
+    </div>
+</div>
+<!-- Product JS -->
+<script src="product.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+</body>
+</html>
