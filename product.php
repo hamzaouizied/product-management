@@ -14,7 +14,7 @@ if(!empty($_POST['productName']) && !empty($_POST['quantityInStock']) && !empty(
             "quantityInStock"       => $_POST['quantityInStock'],
             "price"                 => $_POST['price']."$",
             "dateTime"              => $_POST['dateTime'],
-            "TotalValueNumber"    => $_POST['price'] * $_POST['quantityInStock']."$",
+            "TotalValueNumber"      => $_POST['price'] * $_POST['quantityInStock']."$",
 
         ];
 
